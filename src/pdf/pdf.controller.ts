@@ -57,6 +57,7 @@ export class PdfController {
   @Get('/')
   root (@Res() res) {
     res.header('Content-Type', 'text/html; charset=utf-8')
+    res.status(200)
     res.send(this.pdfService.getStartPage(this.name, this.nameRatio))
   }
 }
