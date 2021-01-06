@@ -10,11 +10,10 @@ new Promise(resolve => {
     const instance = axios.create({
       timeout: 30000
     })
+
     const request = await instance.get(workerData.host).catch(err => {
       throw new Error('AXIOS GET::' + err.message)
     })
-
-    console.log('request', request)
 
     if (!request || request.status !== 200) {
       callbaack(null)
@@ -44,6 +43,8 @@ new Promise(resolve => {
       throw new Error('PAGE NEW::' + err.message)
     })
 
+    await page.emulateMediaType('print')
+
     await page
       .goto(workerData.host, { waitUntil: process.env.CHROME_WAIT_UNTIL })
       .catch(err => {
@@ -55,9 +56,14 @@ new Promise(resolve => {
     const pdf = await page
       .pdf({
         // path: (name || "download") + ".pdf",
-        printBackground: true,
-        width: workerData.width,
-        height: workerData.height
+        printBackground: false,
+        format: 'A4',
+        margin: {
+          top: '2cm',
+          bottom: '2cm',
+          left: '2cm',
+          right: '2cm'
+        }
       })
       .catch(err => {
         throw new Error('PDF CONFIG::' + err.message)
