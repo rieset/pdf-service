@@ -23,11 +23,11 @@ export class PdfController {
       return this.pdfService.getStartPage(this.name, this.nameRatio)
     }
 
-    const [host, prefix, width, height] = process.env[
+    const [host, prefix] = process.env[
       request?.headers?.authorization
     ]
       ? process.env[request?.headers?.authorization].split(',')
-      : [null, null, null, null]
+      : [null, null]
 
     if (!host) {
       res.status(404).send('')
@@ -40,9 +40,7 @@ export class PdfController {
     )
 
     const result = await this.pdfService.getFile({
-      host: url.protocol + '//' + url.host + url.pathname,
-      width,
-      height
+      host: url.protocol + '//' + url.host + url.pathname
     })
 
     if (!result) {
