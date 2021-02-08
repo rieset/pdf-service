@@ -15,7 +15,13 @@ ENV BUILD_DEPS="" \
     FRONTEND_INSTANCES="1" \
     FRONTEND_MEMORY="256M" \
     NODE_OPTIONS="--max_old_space_size=2048" \
-    LABEL="Untld frontend"
+    LABEL="Untld frontend" \
+    CHROME_BINARY_PATH="/app/.apt/opt/google/chrome/chrome" \
+    CHROME_DRIVER_PATH="/app/.chromedriver/bin/chromedriver" \
+    INSTANCES=2 \
+    MEMORY="250M" \
+    SERVICE_NAME="PDF SERVICE" \
+    SERVICE_NAME_RATIO=".54"
 
 WORKDIR /home/$USER
 
