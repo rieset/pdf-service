@@ -1,11 +1,12 @@
 FROM node:14-alpine as source
 # Usage Alpine https://github.com/gliderlabs/docker-alpine/blob/master/docs/usage.md
 
-LABEL authors="Albert Iblyaminov <rieset@yandex.ru>" \
+LABEL authors="Albert Iblyaminov <albert@iblyaminov.io>" \
       org.label-schema.vendor="PDF Service" \
       org.label-schema.name="PDF Service Image" \
       org.label-schema.description="PDF Service" \
-      org.label-schema.schema-version="1.0"
+      org.label-schema.schema-version="1.0" \
+      org.opencontainers.image.source="https://github.com/rieset/pdf-service"
 
 ENV BUILD_DEPS="" \
     RUNTIME_DEPS="" \
