@@ -53,4 +53,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.GHCR_REGISTRY_HOST }}/${{ env.GHCR_REGISTRY_OWNER }}/${{ env.PACKAGE_NAME }}:${{ env.RELEASE_VERSION }}
+            ${{ env.GHCR_REGISTRY_HOST }}/${{ env.GHCR_REGISTRY_OWNER }}/${{ env.PACKAGE_NAME }}:${{ env.TAG_REF }}
