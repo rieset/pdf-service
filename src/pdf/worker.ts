@@ -25,12 +25,12 @@ new Promise(resolve => {
       .launch({
         ...(isProduction
           ? {
-            args: [
-              '--no-sandbox',
-              '--disable-setuid-sandbox',
-              '--disable-dev-shm-usage'
-            ]
-          }
+              args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage'
+              ]
+            }
           : {}),
         ...(process.env.CHROME_BINARY_PATH
           ? { executablePath: process.env.CHROME_BINARY_PATH }
@@ -55,9 +55,7 @@ new Promise(resolve => {
     const pdf = await page
       .pdf({
         // path: (name || "download") + ".pdf",
-        printBackground: true,
-        width: workerData.width,
-        height: workerData.height
+        printBackground: true
       })
       .catch(err => {
         throw new Error('PDF CONFIG::' + err.message)

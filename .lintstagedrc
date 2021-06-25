@@ -11,7 +11,6 @@
  ],
  "*.ts": [
    "prettier --write",
-   "yarn lint",
-   "standardx --fix --parser @typescript-eslint/parser --plugin @typescript-eslint/eslint-plugin -e jest -e node -e es6"
+   "yarn lint"
  ]
 }

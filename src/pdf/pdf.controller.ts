@@ -6,43 +6,47 @@ export class PdfController {
   private readonly name: string
   private readonly nameRatio: number
 
-  constructor (private pdfService: PdfService) {
+  constructor(private pdfService: PdfService) {
     this.nameRatio = parseFloat(process.env.SERVICE_NAME_RATIO) || 0.56
     this.name = process.env.SERVICE_NAME || 'PDF SERVICE'
   }
 
   @Get('/ready')
-  async ready () {
+  async ready() {
     return this.pdfService.getStartPage(this.name, this.nameRatio)
   }
 
   @Get('*')
-  async download (@Req() request, @Res() res) {
+  async download(@Req() request, @Res() res) {
     if (!request?.headers?.authorization) {
       res.status(404)
       return this.pdfService.getStartPage(this.name, this.nameRatio)
     }
 
-    const [host, prefix, width, height] = process.env[
-      request?.headers?.authorization
-    ]
+    const [host, list] = process.env[request?.headers?.authorization]
       ? process.env[request?.headers?.authorization].split(',')
-      : [null, null, null, null]
+      : [null, null]
 
     if (!host) {
       res.status(404).send('')
       return
     }
 
-    const url = new URL(
-      [prefix, request.url].join('/').replace(/\/+/g, '/'),
-      host
-    )
+    const prefixes = list.split('|')
+
+    if (
+      !prefixes.find(prefix => {
+        request.url.indexOf(prefix) == 0
+      })
+    ) {
+      res.status(404).send('')
+      return
+    }
+
+    const url = new URL(request.url.replace(/\/+/g, '/'), host)
 
     const result = await this.pdfService.getFile({
-      host: url.protocol + '//' + url.host + url.pathname,
-      width,
-      height
+      host: url.protocol + '//' + url.host + url.pathname
     })
 
     if (!result) {
@@ -55,7 +59,7 @@ export class PdfController {
   }
 
   @Get('/')
-  root (@Res() res) {
+  root(@Res() res) {
     res.header('Content-Type', 'text/html; charset=utf-8')
     res.status(200)
     res.send(this.pdfService.getStartPage(this.name, this.nameRatio))
