@@ -10,11 +10,10 @@ new Promise(resolve => {
     const instance = axios.create({
       timeout: 30000
     })
+
     const request = await instance.get(workerData.host).catch(err => {
       throw new Error('AXIOS GET::' + err.message)
     })
-
-    console.log('request', request)
 
     if (!request || request.status !== 200) {
       callbaack(null)

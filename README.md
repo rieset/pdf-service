@@ -1,9 +1,9 @@
 # Puppeteer Heroku
 
-[![Linter](https://github.com/rieset/puppeteer-heroku/workflows/Linter/badge.svg)](https://github.com/rieset/puppeteer-heroku/actions)
-[![Testing](https://github.com/rieset/puppeteer-heroku/workflows/Testing/badge.svg)](https://github.com/rieset/puppeteer-heroku/actions)
+[![Linter](https://github.com/rieset/pdf-service/workflows/Linter/badge.svg)](https://github.com/rieset/pdf-service/actions)
+[![Testing](https://github.com/rieset/pdf-service/workflows/Testing/badge.svg)](https://github.com/rieset/pdf-service/actions)
 
-Puppeteer for deployment on the Heroku server. Use to generate PDF files by url page. 
+Puppeteer for deployment on the Heroku server. Use to generate PDF files by url page.
 
 ## Chrome Driver on Heroku
 
@@ -66,7 +66,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
